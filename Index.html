@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>Hover — Effet sur deux images</title>
+<style>
+  .image-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden; /* évite les débordements lors du scale */
+  }
+
+  /* style commun à toutes les images */
+  .image-container img {
+    width: 100%;
+    display: block;
+    transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
+    transform-origin: center center;
+  }
+
+  /* image de fond (dans le flux, détermine la hauteur du container) */
+  .image-bottom {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* image superposée */
+  .image-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none; /* laisse le hover passer au container */
+  }
+
+  /* Effets au survol du container : on fait apparaître la top et on modifie la bottom */
+  .image-container:hover .image-top {
+    opacity: 1;
+  }
+
+  .image-container:hover .image-bottom {
+    transform: scale(1.04);
+    filter: blur(1.2px) brightness(0.92);
+  }
+
+  /* Variante si vous voulez aussi animer la top (par ex. légère translation) */
+  .image-top {
+    transform: translateY(0);
+  }
+
+  .image-container:hover .image-top {
+    transform: translateY(-2px);
+  }
+</style>
+</head>
+<body>
+  <div class="image-container">
+    <img src="https://methodwakfu.com/wp-content/uploads/2019/01/PaturagesBouftous_Salle2_SansVT.jpg" class="image-bottom" alt="Plan 1">
+    <img src="https://methodwakfu.com/wp-content/uploads/2019/01/PaturagesBouftous_Salle2_AvecVT.jpg" class="image-top" alt="Plan 2">
+  </div>
+</body>
+</html>
